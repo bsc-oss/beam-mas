@@ -1,0 +1,824 @@
+{
+  "action": {
+    "back": "Terug",
+    "cancel": "Annuleren",
+    "continue": "Doorgaan",
+    "create_account": "Registreren",
+    "sign_in": "Aanmelden",
+    "sign_out": "Afmelden",
+    "start_over": "Opnieuw beginnen",
+    "submit": "Bevestigen",
+    "@back": {
+      "context": "pages/recovery/disabled.html:22:32-48"
+    },
+    "@sign_in": {
+      "context": "pages/account/deactivated.html:23:28-47, pages/account/locked.html:23:28-47, pages/index.html:31:26-45"
+    },
+    "@sign_out": {
+      "context": "pages/account/logged_out.html:22:28-48, pages/compat_login_policy_violation.html:28:28-48, pages/index.html:29:28-48, pages/policy_violation.html:39:28-48, pages/upstream_oauth2/link_mismatch.html:24:24-44, pages/upstream_oauth2/suggest_link.html:32:26-46"
+    },
+    "skip": "Sla over",
+    "@skip": {
+      "context": "pages/register/steps/display_name.html:49:28-44"
+    },
+    "@start_over": {
+      "context": "pages/recovery/consumed.html:22:32-54, pages/recovery/expired.html:30:32-54, pages/register/steps/email_in_use.html:28:32-54"
+    },
+    "@cancel": {
+      "context": "pages/consent.html:79:11-29, pages/device_consent.html:158:13-31, pages/policy_violation.html:45:13-31"
+    },
+    "@create_account": {
+      "context": "pages/login.html:94:33-59, pages/upstream_oauth2/do_register.html:193:26-52"
+    },
+    "@continue": {
+      "context": "form_post.html:25:28-48, pages/consent.html:69:28-48, pages/device_consent.html:143:30-50, pages/device_link.html:40:26-46, pages/login.html:68:30-50, pages/reauth.html:32:28-48, pages/recovery/start.html:38:26-46, pages/register/password.html:77:26-46, pages/register/steps/display_name.html:43:28-48, pages/register/steps/registration_token.html:41:28-48, pages/register/steps/verify_email.html:51:26-46, pages/sso.html:50:28-48"
+    }
+  },
+  "app": {
+    "human_name": "Beam Authentication Service",
+    "name": "Beam-authentication-service",
+    "@technical_description": {
+      "description": "Inleidingstekst die op de startpagina wordt weergegeven",
+      "context": "pages/index.html:17:13-72"
+    },
+    "@human_name": {
+      "context": "pages/index.html:15:29-48",
+      "description": "Leesbare applicatie naam"
+    },
+    "@name": {
+      "description": "App-naam",
+      "context": "app.html:17:14-27, base.html:26:31-44"
+    },
+    "technical_description": "OpenID Connect discovery document: <a class=\"cpd-link\" data-kind=\"primary\" href=\"%(discovery_url)s\">%(discovery_url)s</a>"
+  },
+  "branding": {
+    "privacy_policy": {
+      "alt": "Link naar het privacybeleid",
+      "link": "Privacybeleid",
+      "@link": {
+        "context": "components/footer.html:14:14-47"
+      },
+      "@alt": {
+        "context": "components/footer.html:13:83-115"
+      }
+    },
+    "terms_and_conditions": {
+      "alt": "Link naar de gebruiksvoorwaarden",
+      "link": "Algemene voorwaarden",
+      "@alt": {
+        "context": "components/footer.html:23:80-118"
+      },
+      "@link": {
+        "context": "components/footer.html:24:14-53"
+      }
+    }
+  },
+  "common": {
+    "display_name": "Weergavenaam",
+    "email_address": "E-mailadres",
+    "loading": "Laden…",
+    "mxid": "Beam ID",
+    "password": "Wachtwoord",
+    "password_confirm": "Bevestig wachtwoord",
+    "username": "Gebruikersnaam",
+    "@display_name": {
+      "context": "pages/register/steps/display_name.html:34:35-59, pages/upstream_oauth2/do_register.html:148:37-61"
+    },
+    "@loading": {
+      "context": "form_post.html:14:27-46"
+    },
+    "@mxid": {
+      "context": "pages/upstream_oauth2/do_register.html:94:35-51"
+    },
+    "@password": {
+      "context": "pages/login.html:56:37-57, pages/reauth.html:28:35-55, pages/register/password.html:42:33-53"
+    },
+    "@password_confirm": {
+      "context": "pages/register/password.html:46:33-61"
+    },
+    "@email_address": {
+      "context": "pages/recovery/start.html:34:33-58, pages/register/password.html:40:35-60, pages/upstream_oauth2/do_register.html:116:37-62"
+    },
+    "@username": {
+      "context": "pages/login.html:50:37-57, pages/register/index.html:30:35-55, pages/register/password.html:34:33-53, pages/upstream_oauth2/do_register.html:102:35-55, pages/upstream_oauth2/do_register.html:107:39-59"
+    }
+  },
+  "error": {
+    "unexpected": "Onverwachte fout",
+    "@unexpected": {
+      "context": "pages/error.html:22:29-50",
+      "description": "Foutmelding bij een onverwachte fout"
+    }
+  },
+  "mas": {
+    "change_password": {
+      "change": "Wachtwoord wijzigen",
+      "confirm": "Bevestig wachtwoord",
+      "current": "Huidig wachtwoord",
+      "description": "Hiermee wordt het wachtwoord van je account gewijzigd.",
+      "@change": {
+        "description": "Knop om het wachtwoord van de gebruiker te wijzigen"
+      },
+      "@confirm": {
+        "description": "Bevestigingsveld voor het nieuwe wachtwoord"
+      },
+      "@current": {
+        "description": "Veld voor het huidige wachtwoord van de gebruiker"
+      },
+      "heading": "Mijn wachtwoord veranderen",
+      "new": "Nieuw wachtwoord",
+      "@heading": {
+        "description": "Koptekst op de pagina voor het wijzigen van het wachtwoord"
+      },
+      "@new": {
+        "description": "Veld voor nieuw wachtwoord"
+      }
+    },
+    "consent": {
+      "make_sure_you_trust": "Verzeker je dat je  <span>%(client_name)s</span> vertrouwt.",
+      "this_will_allow": "Dit zal <span>%(client_name)s</span> toelaten om:",
+      "heading": "Toegang tot je account toelaten?",
+      "you_may_be_sharing": "Het kan zijn dat je gevoelige informatie deelt met deze website of app.",
+      "scope_list_preface": "Geef het nieuwe apparaat toegang tot dit Beam-account:",
+      "@scope_list_preface": {
+        "context": "pages/consent.html:41:13-73, pages/device_consent.html:104:15-75"
+      },
+      "this_will_setup": "Om in te loggen op %(client_name)s, druk op Doorgaan.",
+      "continue_to": "Doorgaan naar <span>%(client_name)s</span>?",
+      "use_another_account": "Gebruik een ander account",
+      "@continue_to": {
+        "context": "pages/device_consent.html:29:13-66, pages/sso.html:23:11-64"
+      },
+      "@use_another_account": {
+        "context": "pages/consent.html:74:11-47, pages/device_consent.html:151:13-49, pages/sso.html:55:11-47"
+      }
+    },
+    "device_display_name": {
+      "unknown_device": "Onbekend apparaat",
+      "client_on_device": "%(client_name)s op %(device_name)s",
+      "name_for_platform": "%(name)s voor %(platform)s",
+      "@unknown_device": {
+        "context": "toestel_name.txt:24:8-51"
+      },
+      "@client_on_device": {
+        "context": "-",
+        "description": "-"
+      },
+      "@name_for_platform": {
+        "context": "-",
+        "description": "-"
+      }
+    },
+    "errors": {
+      "invalid_credentials": "Ongeldige gegevens",
+      "captcha": "CAPTCHA-verificatie mislukt, probeer het opnieuw.",
+      "email_banned": "E-mail is geweerd door het serverbeleid",
+      "email_domain_banned": "E-maildomein is geweerd door het serverbeleid",
+      "email_domain_not_allowed": "E-maildomein is niet toegelaten door het serverbeleid",
+      "field_required": "Dit veld is verplicht",
+      "password_mismatch": "Wachtwoord velden komen niet overeen",
+      "rate_limit_exceeded": "Je hebt in korte tijd te veel aanvragen gedaan. Gelieve een paar minuten te wachten en het opnieuw te proberen.",
+      "username_all_numeric": "Gebruikersnaam kan niet enkel uit nummers bestaan",
+      "username_not_allowed": "Gebruikersnaam is niet toegelaten door het serverbeleid",
+      "username_taken": "Deze gebruikersnaam is al in gebruik",
+      "username_too_long": "Gebruikersnaam is te lang",
+      "username_too_short": "Gebruikersnaam is te kort",
+      "@username_not_allowed": {
+        "description": "Foutmeldingen weergegeven bij registratie, wanneer de gebruikersnaam *niet overeenkomt* met een van de patronen die zijn toegestaan door het serverbeleid.",
+        "context": "-"
+      },
+      "denied_policy": "Geweigerd door beleid: %(policy)s",
+      "username_invalid_chars": "Gebruikersnaam bevat ongeldige karakters. Gebruik enkel kleine letters, nummers, koppeltekens en lage streepjes.",
+      "@username_banned": {
+        "description": "-",
+        "context": "-"
+      },
+      "email_not_allowed": "E-mailadres is niet toegelaten door het serverbeleid",
+      "username_banned": "Gebruikersnaam niet toegestaan door serverbeleid",
+      "@username_all_numeric": {
+        "context": "-"
+      },
+      "@username_invalid_chars": {
+        "context": "-"
+      },
+      "@username_taken": {
+        "context": "-"
+      },
+      "@denied_policy": {
+        "context": "components/errors.html:17:7-58, components/field.html:52:11-62"
+      },
+      "@email_banned": {
+        "context": "components/field.html:50:11-39"
+      },
+      "@captcha": {
+        "context": "-"
+      },
+      "@email_domain_banned": {
+        "context": "components/field.html:46:11-46"
+      },
+      "@email_domain_not_allowed": {
+        "context": "components/field.html:44:11-51"
+      },
+      "@email_not_allowed": {
+        "context": "components/field.html:48:11-44"
+      },
+      "@field_required": {
+        "context": "components/field.html:27:9-39"
+      },
+      "@invalid_credentials": {
+        "context": "components/errors.html:11:7-42"
+      },
+      "@password_mismatch": {
+        "context": "-"
+      },
+      "@rate_limit_exceeded": {
+        "context": "-"
+      },
+      "@username_too_long": {
+        "context": "-"
+      },
+      "@username_too_short": {
+        "context": "-"
+      }
+    },
+    "login": {
+      "continue_with_provider": "Doorgaan met %(provider)s",
+      "headline": "Aanmelden",
+      "separator": "Of",
+      "username_or_email": "Gebruikersnaam of e-mailadres",
+      "call_to_register": "Heb je nog geen account?",
+      "description": "Meld je aan om verder te gaan:",
+      "forgot_password": "Wachtwoord vergeten?",
+      "@forgot_password": {
+        "description": "Op de inlogpagina, link naar het accountherstelproces",
+        "context": "pages/login.html:29:29-55"
+      },
+      "link": {
+        "description": "Koppel je <span class=\"break-keep text-links\">%(provider)s</span> account",
+        "headline": "Meld je aan om te koppelen",
+        "@description": {
+          "context": "pages/login.html:24:29-75"
+        },
+        "@headline": {
+          "context": "pages/login.html:24:29-75"
+        }
+      },
+      "@continue_with_provider": {
+        "description": "Knop om in te loggen bij een provider",
+        "context": "-"
+      },
+      "no_login_methods": "Geen login methodes beschikbaar.",
+      "@username_or_email": {
+        "context": "pages/login.html:46:37-69"
+      },
+      "@headline": {
+        "context": "pages/login.html:28:31-54"
+      },
+      "@call_to_register": {
+        "context": "-"
+      },
+      "@description": {
+        "context": "pages/login.html:29:29-55"
+      },
+      "@no_login_methods": {
+        "context": "pages/login.html:100:11-42"
+      }
+    },
+    "navbar": {
+      "my_account": "Mijn account",
+      "register": "Account aanmaken",
+      "signed_in_as": "Aangemeld als <span class=\"font-semibold\">%(username)s</span>.",
+      "@signed_in_as": {
+        "description": "Getoond in de navbar wanneer de gebruiker aangemeld is",
+        "context": "pages/index.html:25:11-126"
+      },
+      "@my_account": {
+        "context": "pages/index.html:28:26-52"
+      },
+      "@register": {
+        "context": "pages/index.html:34:36-60"
+      }
+    },
+    "or_separator": "Of",
+    "upstream_oauth2": {
+      "login_link": {
+        "action": "Doorgaan",
+        "heading": "Link aan je bestaande account",
+        "description": "Een account bestaat voor deze gebruikersnaam (%(username)s), het zal gelinkt worden aan deze account."
+      },
+      "register": {
+        "choose_username": {
+          "heading": "Kies je gebruikersnaam",
+          "description": "Dit kan nadien niet aangepast worden.",
+          "@heading": {
+            "description": "Weergegeven bij het aanmaken van een nieuw account via een SSO-inlog, en de gebruikersnaam is niet verplicht",
+            "context": "pages/upstream_oauth2/do_register.html:50:13-70"
+          },
+          "@description": {
+            "context": "pages/upstream_oauth2/do_register.html:53:13-74"
+          }
+        },
+        "create_account": "Nieuw account aanmaken",
+        "forced_email": "Het volgende e-mailadres zal worden gebruikt",
+        "forced_localpart": "De volgende gebruikersnaam zal worden gebruikt",
+        "import_data": {
+          "heading": "Importeer je gegevens",
+          "description": "Bevestig de gegevens die aan je nieuwe %(server_name)s-account worden gekoppeld."
+        },
+        "suggested_display_name": "Weergavenaam importeren",
+        "suggested_email": "E-mailadres importeren",
+        "use": "Gebruiken",
+        "pg_import_data": {
+          "@description": {
+            "context": "pages/upstream_oauth2/do_register.html:26:13-107"
+          },
+          "heading": "Je profiel",
+          "@heading": {
+            "context": "pages/upstream_oauth2/do_register.html:23:13-69"
+          },
+          "description": "Bekijk uw gegevens hieronder om je account aan te maken."
+        },
+        "forced_display_name": "Zal de volgende weergavenaam gebruiken",
+        "@forced_display_name": {
+          "description": "Geeft de gebruiker aan welke weergavenaam zal worden geïmporteerd"
+        },
+        "@forced_email": {
+          "description": "Vertelt de gebruiker welke e-mailadres zal worden geïmporteerd"
+        },
+        "imported_from_upstream": "Geïmporteerd van je account",
+        "imported_from_upstream_with_name": "Geïmporteerd van je %(human_name)s account",
+        "link_existing": "Link aan een bestaande account",
+        "@link_existing": {
+          "description": "Knop om een bestaande account te linken na een SSO login"
+        },
+        "provider_name": "%(human_name)s account",
+        "signup_with_upstream": {
+          "heading": "Ga verder met aanmelding met je %(human_name)s account",
+          "@heading": {
+            "context": "pages/upstream_oauth2/do_register.html:38:13-122"
+          }
+        },
+        "enforced_by_policy": "Geforceerd door het serverbeleid",
+        "@create_account": {
+          "description": "Weergegeven bij het aanmaken van een nieuwe account vanuit een SSO login, en de gebruikersnaam is niet vooraf ingevuld of geforceerd."
+        },
+        "@suggested_display_name": {
+          "description": "Optie om de gebruiker zijn weergavenaam te laten importeren na een SSO login"
+        },
+        "@suggested_email": {
+          "description": "Optie om de gebruiker zijn e-mailadres te importeren na een SSO login"
+        },
+        "@forced_localpart": {
+          "description": "Vertelt de gebruiker welke gebruikersnaam zal gebruikt worden"
+        },
+        "@enforced_by_policy": {
+          "context": "pages/upstream_oauth2/do_register.html:98:14-66"
+        },
+        "@provider_name": {
+          "context": "pages/upstream_oauth2/do_register.html:69:14-108"
+        },
+        "@imported_from_upstream": {
+          "context": "pages/upstream_oauth2/do_register.html:123:18-74, pages/upstream_oauth2/do_register.html:155:18-74"
+        },
+        "@imported_from_upstream_with_name": {
+          "context": "pages/upstream_oauth2/do_register.html:121:18-131, pages/upstream_oauth2/do_register.html:153:18-131"
+        },
+        "@use": {
+          "context": "pages/upstream_oauth2/do_register.html:139:18-55, pages/upstream_oauth2/do_register.html:172:20-57"
+        }
+      },
+      "suggest_link": {
+        "action": "Koppelen",
+        "heading": "Koppel aan je bestaande account",
+        "@action": {
+          "context": "pages/upstream_oauth2/suggest_link.html:27:28-72"
+        },
+        "@heading": {
+          "context": "pages/upstream_oauth2/suggest_link.html:18:27-72"
+        }
+      },
+      "link_mismatch": {
+        "heading": "Deze account is al gelinkt aan een andere account.",
+        "@heading": {
+          "description": "Pagina getoond wanneer de gebruiker een account probeert te linken die al gelinkt is aan een andere account",
+          "context": "pages/upstream_oauth2/link_mismatch.html:19:11-57"
+        }
+      }
+    },
+    "verify_email": {
+      "6_digit_code": "6-cijferige code",
+      "description": "Voer de 6-cijferige code in die is verzonden naar: <em>%(email)s</em>",
+      "headline": "Verifieer je e-mailadres",
+      "@6_digit_code": {
+        "context": "pages/register/steps/verify_email.html:33:33-67"
+      },
+      "@description": {
+        "context": "pages/register/steps/verify_email.html:18:25-86"
+      },
+      "@headline": {
+        "context": "pages/register/steps/verify_email.html:17:27-57"
+      }
+    },
+    "account": {
+      "deactivated": {
+        "heading": "Account verwijderd",
+        "@description": {
+          "context": "pages/account/deactivated.html:20:27-78"
+        },
+        "@heading": {
+          "context": "pages/account/deactivated.html:18:29-65"
+        },
+        "description": "Deze account (<em>%(mxid)s</em>) is verwijderd. Contacteer je serveradministrator als dit onverwacht is."
+      },
+      "locked": {
+        "heading": "Account vergrendeld",
+        "@description": {
+          "context": "pages/account/locked.html:20:27-73"
+        },
+        "@heading": {
+          "context": "pages/account/locked.html:18:29-60"
+        },
+        "description": "Dit account (<em>%(mxid)s</em>) is geblokkeerd. Contacteer je serviceadministrator als dit onverwacht is."
+      },
+      "logged_out": {
+        "description": "Deze sessie is beëindigd. Meld je af om opnieuw in te loggen.",
+        "heading": "Sessie beeindigd",
+        "@description": {
+          "context": "pages/account/logged_out.html:19:27-66"
+        },
+        "@heading": {
+          "context": "pages/account/logged_out.html:18:29-64"
+        }
+      }
+    },
+    "back_to_homepage": "Terug naar de startpagina",
+    "captcha": {
+      "noscript": "Dit formulier is beveiligd met een CAPTCHA en vereist dat JavaScript is ingeschakeld om het in te dienen. Schakel JavaScript in je browser in en ververs deze pagina.",
+      "@noscript": {
+        "context": "components/captcha.html:13:11-36"
+      }
+    },
+    "@back_to_homepage": {
+      "context": "pages/404.html:16:29-54"
+    },
+    "choose_display_name": {
+      "description": "Dit is de naam die gebruikers zullen zien. Je kunt dit op elk moment wijzigen.",
+      "headline": "Kies je weergavenaam",
+      "@description": {
+        "context": "pages/register/steps/display_name.html:17:25-65",
+        "description": "Tijdens de registratie moet de gebruiker een weergavenaam kiezen. Dit is de beschrijving van dat formulier."
+      },
+      "@headline": {
+        "context": "pages/register/steps/display_name.html:16:27-64",
+        "description": "Tijdens de registratieprocedure wordt de gebruiker gevraagd een weergeven naam te kiezen. Dit is de beschrijving van dat formulier."
+      }
+    },
+    "device_card": {
+      "access_requested": "Toegang aangevraagd",
+      "device_code": "Code",
+      "generic_device": "Apparaat",
+      "ip_address": "IP adres",
+      "@device_code": {
+        "context": "pages/device_consent.html:92:34-66"
+      },
+      "@access_requested": {
+        "context": "pages/device_consent.html:88:34-71"
+      },
+      "@generic_device": {
+        "context": "pages/device_consent.html:76:22-57"
+      },
+      "@ip_address": {
+        "context": "-"
+      }
+    },
+    "device_code_link": {
+      "headline": "Voeg de code, zichtbaar op je toestel, in",
+      "description": "Link een toestel",
+      "@description": {
+        "context": "-"
+      },
+      "@headline": {
+        "context": "-"
+      }
+    },
+    "device_consent": {
+      "another_device_access": "Een ander toestel wil toegang tot je account: %(username)s.",
+      "granted": {
+        "heading": "Toegang verleend",
+        "description": "Je hebt de toegang tot %(client_name)s goedgekeurd. Je kunt dit venster sluiten.",
+        "@description": {
+          "context": "-"
+        },
+        "@heading": {
+          "context": "-"
+        }
+      },
+      "denied": {
+        "heading": "Toegang geweigerd",
+        "description": "Je hebt de toegang tot %(client_name)s geweigerd. Je kunt dit venster sluiten.",
+        "@description": {
+          "context": "-"
+        },
+        "@heading": {
+          "context": "-"
+        }
+      },
+      "wait_seconds": {
+        "one": "Gelieve %(count)d seconde te wachten",
+        "other": "Gelieve %(count)d seconden te wachten",
+        "@other": {
+          "context": "-",
+          "description": "-"
+        }
+      },
+      "this_will_setup": "Een ander apparaat wil %(client_name)s (<span>%(client_uri)s</span>) instellen met je <span>%(server_name)s</span> account. Zorg ervoor dat je dat apparaat herkent.",
+      "@this_will_setup": {
+        "context": "-"
+      }
+    },
+    "emails": {
+      "recovery": {
+        "create_new_password": "Kies een nieuw wachtwoord",
+        "fallback": "Werkt de knop niet?",
+        "headline": "Je hebt een wachtwoordreset aangevraagd voor je %(server_name)s account.",
+        "subject": "Stel je accountwachtwoord opnieuw in (%(mxid)s)",
+        "click_button": "Klik op de onderstaande knop om een nieuwe wachtwoord te genereren:",
+        "copy_link": "Kopieer en plak deze link in een browser om een nieuw wachtwoord te maken:",
+        "you_can_ignore": "Als je geen nieuw wachtwoord aangevraagd hebt, kan je deze e-mail negeren. Je huidige wachtwoord blijft geldig.",
+        "@create_new_password": {
+          "context": "emails/recovery.html:44:9-53"
+        },
+        "@fallback": {
+          "context": "emails/recovery.html:46:9-42"
+        },
+        "@click_button": {
+          "context": "emails/recovery.html:28:7-44"
+        },
+        "@copy_link": {
+          "context": "emails/recovery.html:46:49-83, emails/recovery.txt:12:3-37"
+        },
+        "@subject": {
+          "context": "emails/recovery.subject:14:3-46"
+        },
+        "@headline": {
+          "context": "emails/recovery.html:26:7-74, emails/recovery.txt:10:3-70"
+        },
+        "@you_can_ignore": {
+          "context": "emails/recovery.html:52:7-46, emails/recovery.txt:16:3-42"
+        }
+      },
+      "verify": {
+        "body_html": "Je verificatiecode om je e-mailadres te valideren is: <strong>%(code)s</strong>",
+        "subject": "Je e-mailverificatiecode is: %(code)s",
+        "@body_text": {
+          "description": "De verzonden inhoud van de mail om het emailadres te verifiëren.",
+          "context": "emails/verification.txt:19:3-66"
+        },
+        "@body_html": {
+          "description": "-",
+          "context": "emails/verification.html:19:3-66"
+        },
+        "@subject": {
+          "description": "De onderwerplijn van de verzonden email om het emailadres te verifiëren",
+          "context": "-"
+        },
+        "body_text": "Je verificatiecode om dit emailadres te bevestigen is: %(code)s"
+      },
+      "greeting": "Hallo %(username)s,",
+      "@greeting": {
+        "description": "Begroeting bovenaan e-mails aan de gebruiker",
+        "context": "emails/verification.html:17:3-64, emails/verification.txt:17:3-64"
+      }
+    },
+    "email_in_use": {
+      "title": "Het e-mail adres <span>%(email)s</span> is al in gebruik",
+      "description": "Wanneer je je accountgegevens vergeten bent, kan je je account herstellen. Je kan ook opnieuw beginnen en een ander emailadres gebruiken.",
+      "@title": {
+        "context": "pages/register/steps/email_in_use.html:19:13-53"
+      },
+      "@description": {
+        "context": "pages/register/steps/email_in_use.html:22:13-46"
+      }
+    },
+    "not_found": {
+      "heading": "Pagina niet gevonden",
+      "description": "De pagina die je zoekt bestaat niet meer of is verplaatst",
+      "@description": {
+        "context": "pages/404.html:14:8-38"
+      },
+      "@heading": {
+        "context": "-"
+      }
+    },
+    "not_you": "Niet %(username)s?",
+    "policy_violation": {
+      "description": "Mogelijke oorzaken: de client, de gebruiker of het verzoek zelf",
+      "logged_as": "Ingelogd als <span class=\"font-semibold\">%(username)s</span>",
+      "@heading": {
+        "description": "Getoond wanneer een autorisatieverzoek geweigerd werd door het beleid",
+        "context": "pages/compat_login_policy_violation.html:17:27-60, pages/policy_violation.html:18:27-60"
+      },
+      "@description": {
+        "description": "Getoond wanneer een autorisatieverzoek geweigerd werd door het beleid",
+        "context": "pages/compat_login_policy_violation.html:18:25-62, pages/policy_violation.html:19:25-62"
+      },
+      "heading": "Autorisatieverzoek geweigerd door het beleid afgedwongen door deze dienst",
+      "@logged_as": {
+        "context": "pages/compat_login_policy_violation.html:25:11-86, pages/policy_violation.html:36:11-86"
+      }
+    },
+    "scope": {
+      "view_profile": "Bekijk je profiel- en contactgegevens",
+      "edit_profile": "Bewerk je profiel en contactgegevens",
+      "manage_sessions": "Beheer je apparaten en sessies",
+      "@edit_profile": {
+        "description": "Weergegeven wanneer de 'urn:mas:graphql:*' scope wordt aangevraagd.",
+        "context": "components/scope.html:45:35-62"
+      },
+      "@mas_admin": {
+        "description": "Getoond wanneer de 'urn:mas:admin' scope is aangevraagd",
+        "context": "components/scope.html:53:54-91"
+      },
+      "send_messages": "Verzend een nieuw bericht",
+      "synapse_admin": "Beheer de server (urn:synapse:admin:*)",
+      "@synapse_admin": {
+        "description": "Getoond wanneer de 'urn:synapse:admin:*' scope is aangevraagd",
+        "context": "components/scope.html:51:53-94"
+      },
+      "@view_messages": {
+        "description": "Getoond wanneer de 'urn:matrix:client:api:*' scope is aangevraagd",
+        "context": "components/scope.html:48:35-63"
+      },
+      "@view_profile": {
+        "description": "Getoond wanneer de 'openid' scope is aangevraagd",
+        "context": "components/scope.html:43:43-70"
+      },
+      "mas_admin": "Beheer elke gebruiker op de Beam-authentication-service",
+      "view_messages": "Bekijk je bestaande berichten en gegevens",
+      "@manage_sessions": {
+        "description": "Getoond wanneer de 'urn:mas:graphql:*' scope is aangevraagd",
+        "context": "components/scope.html:46:39-69"
+      },
+      "@send_messages": {
+        "context": "components/scope.html:49:35-63"
+      }
+    },
+    "recovery": {
+      "consumed": {
+        "description": "Om een nieuw wachtwoord te creëren, begin opnieuw en selecteer \"Wachtwoord vergeten\".",
+        "heading": "De link om het wachtwoord te resetten werd al gebruikt",
+        "@description": {
+          "description": "Getoond omschrijving op de foutpagina wanneer een gebruiker een herstellink probeert te gebruiken die al gebruikt werd",
+          "context": "pages/recovery/consumed.html:19:25-63"
+        },
+        "@heading": {
+          "description": "Getoond titel op de foutpagina wanneer een gebruiker een herstellink probeert te gebruiken die al gebruikt werd",
+          "context": "pages/recovery/consumed.html:18:27-61"
+        }
+      },
+      "progress": {
+        "change_email": "Probeer een andere mail",
+        "heading": "Controleer je e-mail",
+        "resend_email": "E-mail opnieuw verzenden",
+        "@resend_email": {
+          "description": "Knop om de e-mail opnieuw te verzenden met de wachtwoordherstellink",
+          "context": "-"
+        },
+        "@change_email": {
+          "description": "Knop om het emailadres voor de wachtwoordherstellink aan te passen",
+          "context": "pages/recovery/progress.html:35:33-72"
+        },
+        "@heading": {
+          "description": "De titel van de wachtwoordherstelpagina, waarin de gebruiker wordt geïnformeerd dat er een e-mail verzonden is om het wachtwoord opnieuw in te stellen",
+          "context": "pages/recovery/progress.html:18:27-61"
+        },
+        "description": "Als er een account bestaat voor <span>%(email)s</span>, hebben we een e-mail gestuurd om je wachtwoord te resetten.",
+        "@description": {
+          "description": "De beschrijving van de wachtwoordherstelpagina, waarin de gebruiker wordt geïnformeerd dat er een e-mail verzonden is om het wachtwoord opnieuw in te stellen",
+          "context": "pages/recovery/progress.html:19:46-105"
+        }
+      },
+      "start": {
+        "description": "Je ontvangt een e-mail met een link om je wachtwoord te resetten.",
+        "@description": {
+          "description": "De beschrijving van de pagina om je account te herstellen",
+          "context": "-"
+        },
+        "heading": "Geef je e-mail in om verder te gaan",
+        "@heading": {
+          "description": "De titel van de pagina om je account te herstellen",
+          "context": "-"
+        }
+      },
+      "finish": {
+        "@new": {
+          "description": "Label voor het nieuwe wachtwoordveld",
+          "context": "pages/recovery/finish.html:37:33-61"
+        },
+        "@save_and_continue": {
+          "description": "Knop om het nieuwe wachtwoord te bewaren en verder te gaan",
+          "context": "pages/recovery/finish.html:45:26-68"
+        },
+        "@heading": {
+          "description": "Kop voor de laatste wachtwoordherstelpagina",
+          "context": "pages/recovery/finish.html:18:27-59"
+        },
+        "new": "Nieuw wachtwoord",
+        "save_and_continue": "Bewaar en ga verder",
+        "@confirm": {
+          "context": "-",
+          "description": "Label"
+        },
+        "@description": {
+          "context": "pages/recovery/finish.html:19:25-61",
+          "description": "Beschrijving"
+        },
+        "confirm": "Geef je nieuw wachtwoord opnieuw in",
+        "description": "Kies een nieuw wachtwoord voor uw account.",
+        "heading": "Wachtwoord resetten"
+      },
+      "disabled": {
+        "description": "Als je je logingegevens verloren bent, contacteer dan de administrator om je account te herstellen.",
+        "heading": "Herstel account werd uitgeschakeld",
+        "@description": {
+          "context": "pages/recovery/disabled.html:19:25-63"
+        },
+        "@heading": {
+          "context": "pages/recovery/disabled.html:18:27-61"
+        }
+      },
+      "expired": {
+        "description": "Vraag een nieuwe e-mail aan die verzonden wordt naar: <span>%(email)s</span>.",
+        "heading": "De link om uw wachtwoord opnieuw in te stellen is verlopen.",
+        "resend_email": "E-mail opnieuw verzenden",
+        "@heading": {
+          "context": "pages/recovery/expired.html:18:27-60",
+          "description": "Titel"
+        },
+        "@resend_email": {
+          "context": "pages/recovery/expired.html:27:28-66"
+        },
+        "@description": {
+          "context": "pages/recovery/expired.html:19:46-104",
+          "description": "Beschrijving op de foutpagina wanneer een gebruiker probeert een al gebruikt herstel-link te gebruiken"
+        }
+      }
+    },
+    "register": {
+      "call_to_login": "Heb je al een account?",
+      "@call_to_login": {
+        "description": "Getoond op de registratie pagina om voor te stellen om in de plaats in te loggen",
+        "context": "-"
+      },
+      "continue_with_email": "Ga verder met dit e-mailadres",
+      "create_account": {
+        "description": "Kies een gebruikersnaam om verder te gaan.",
+        "heading": "Maak een account aan",
+        "@heading": {
+          "context": "-"
+        },
+        "@description": {
+          "context": "-"
+        }
+      },
+      "terms_of_service": "Ik ga akkoord met de <a href=\"%s\" data-kind=\"primary\" class=\"cpd-link\">Terms and Conditions</a>",
+      "@continue_with_email": {
+        "context": "-"
+      },
+      "@terms_of_service": {
+        "context": "-"
+      },
+      "continue_with_password": "Verder met wachtwoord",
+      "@continue_with_password": {
+        "context": "-"
+      }
+    },
+    "registration_token": {
+      "description": "Voer een registratietoken in dat is verstrekt door de homeserver administrator.",
+      "field": "Registratie token",
+      "headline": "Registratie token",
+      "@description": {
+        "context": "pages/recovery/progress.html:32:36-75"
+      },
+      "@field": {
+        "context": "pages/register/steps/registration_token.html:33:35-68"
+      },
+      "@headline": {
+        "context": "pages/register/steps/registration_token.html:16:27-63"
+      }
+    },
+    "@not_you": {
+      "description": "Suggesties voor de gebruiker om in te loggen als een andere gebruiker"
+    },
+    "@or_separator": {
+      "description": "Verdeler tussen de inlogmethodes",
+      "context": "-"
+    },
+    "legacy_consent": {
+      "this_will_setup": "Dit zal %(client_name)s instellen met je %(server_name)s account.",
+      "@this_will_setup": {
+        "context": "-"
+      }
+    }
+  }
+}
