@@ -1,0 +1,15 @@
+{# 
+  Macro to display user with fallback logic:
+  - "display_name (email)" if both are defined
+  - "email" if only email is defined  
+  - "username" as final fallback
+#}
+{% macro identity(display_name, email, username) %}
+  {%- if display_name and email -%}
+    {{ display_name }} ({{ email }})
+  {%- elif email -%}
+    {{ email }}
+  {%- else -%}
+    {{ username }}
+  {%- endif -%}
+{% endmacro %}
