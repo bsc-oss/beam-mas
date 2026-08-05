@@ -1,0 +1,196 @@
+# syntax = docker/dockerfile:1.21.0
+# Copyright 2025, 2026 Element Creations Ltd.
+# Copyright 2025 New Vector Ltd.
+#
+# SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+# Please see LICENSE files in the repository root for full details.
+
+# Builds a minimal image with the binary only. It is multi-arch capable,
+# cross-building to aarch64 and x86_64. When cross-compiling, Docker sets two
+# implicit BUILDARG: BUILDPLATFORM being the host platform and TARGETPLATFORM
+# being the platform being built.
+
+# The Debian version and version name must be in sync
+ARG DEBIAN_VERSION=13
+ARG DEBIAN_VERSION_NAME=trixie
+# Keep in sync with .github/workflows/ci.yaml
+ARG RUSTC_VERSION=1.93.0
+ARG NODEJS_VERSION=24.13.0
+# Keep in sync with .github/actions/build-policies/action.yml and policies/Makefile
+ARG OPA_VERSION=1.13.1
+ARG CARGO_AUDITABLE_VERSION=0.7.2
+
+##########################################
+## Build stage that builds the frontend ##
+##########################################
+FROM --platform=${BUILDPLATFORM} docker.io/library/node:${NODEJS_VERSION}-${DEBIAN_VERSION_NAME} AS frontend
+
+WORKDIR /app/frontend
+
+# PG_CHANGED - installs our custom CAs.
+COPY custom-cas/*.crt /usr/local/share/ca-certificates/
+RUN update-ca-certificates
+
+# PG_CHANGED - configures node to use the custom CAs.
+ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+
+COPY ./frontend/.npmrc ./frontend/package.json ./frontend/package-lock.json /app/frontend/
+# Network access: to fetch dependencies
+RUN --network=default \
+  npm ci
+
+COPY ./frontend/ /app/frontend/
+COPY ./templates/ /app/templates/
+RUN --network=none \
+  npm run build
+
+# Move the built files
+RUN --network=none \
+  mkdir -p /share/assets && \
+  cp ./dist/manifest.json /share/manifest.json && \
+  rm -f ./dist/index.html* ./dist/manifest.json* && \
+  cp ./dist/* /share/assets/
+
+##############################################
+## Build stage that builds the OPA policies ##
+##############################################
+FROM --platform=${BUILDPLATFORM} docker.io/library/buildpack-deps:${DEBIAN_VERSION_NAME} AS policy
+
+ARG BUILDOS
+ARG BUILDARCH
+ARG OPA_VERSION
+
+# Download Open Policy Agent
+ADD --chmod=755 https://github.com/open-policy-agent/opa/releases/download/v${OPA_VERSION}/opa_${BUILDOS}_${BUILDARCH}_static /usr/local/bin/opa
+
+WORKDIR /app/policies
+COPY ./policies /app/policies
+RUN --network=none  \
+  make -B && \
+  chmod a+r ./policy.wasm
+
+########################################
+## Build stage that builds the binary ##
+########################################
+FROM --platform=${BUILDPLATFORM} docker.io/library/rust:${RUSTC_VERSION}-${DEBIAN_VERSION_NAME} AS builder
+
+ARG CARGO_AUDITABLE_VERSION
+ARG RUSTC_VERSION
+
+# PG_CHANGED - installs our custom CAs.
+COPY custom-cas/*.crt /usr/local/share/ca-certificates/
+RUN update-ca-certificates
+
+# PG_CHANGED - forces apt to use https instead of http
+RUN for f in /etc/apt/sources.list.d/*.sources; do \
+      sed -i 's|http://|https://|g' "$f"; \
+    done
+
+# Install pinned versions of cargo-auditable
+# Network access: to fetch dependencies
+RUN --network=default \
+  cargo install --locked \
+  cargo-auditable@=${CARGO_AUDITABLE_VERSION}
+
+# Install all cross-compilation targets
+# Network access: to download the targets
+RUN --network=default \
+  rustup target add  \
+  --toolchain "${RUSTC_VERSION}" \
+  x86_64-unknown-linux-gnu 
+  # PG_CHANGED - comments out arm64
+  # aarch64-unknown-linux-gnu
+
+RUN --network=none \
+  # PG_CHANGED - comments out arm64
+  # dpkg --add-architecture arm64 && \
+  dpkg --add-architecture amd64
+
+ARG BUILDPLATFORM
+
+# Install cross-compilation toolchains for all supported targets
+# Network access: to install apt packages
+RUN --network=default \
+  apt-get update && apt-get install -y \
+  # PG_CHANGED - comments out arm64
+  # $(if [ "${BUILDPLATFORM}" != "linux/arm64" ]; then echo "g++-aarch64-linux-gnu"; fi) \
+  $(if [ "${BUILDPLATFORM}" != "linux/amd64" ]; then echo "g++-x86-64-linux-gnu"; fi) \
+  libc6-dev-amd64-cross \
+  # PG_CHANGED - comments out arm64
+  # libc6-dev-arm64-cross \
+  g++
+
+# Setup the cross-compilation environment
+ENV \
+  # PG_CHANGED - comments out arm64
+  # CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc \
+  # CC_aarch64_unknown_linux_gnu=aarch64-linux-gnu-gcc \
+  # CXX_aarch64_unknown_linux_gnu=aarch64-linux-gnu-g++ \
+  CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER=x86_64-linux-gnu-gcc \
+  CC_x86_64_unknown_linux_gnu=x86_64-linux-gnu-gcc \
+  CXX_x86_64_unknown_linux_gnu=x86_64-linux-gnu-g++
+
+# Set the working directory
+WORKDIR /app
+
+# Copy only dependency manifests first to cache dependencies
+COPY ./Cargo.toml ./Cargo.lock /app/
+COPY ./crates /app/crates
+
+ENV SQLX_OFFLINE=true
+
+ARG VERGEN_GIT_DESCRIBE
+ENV VERGEN_GIT_DESCRIBE=${VERGEN_GIT_DESCRIBE}
+
+# Build dependencies first (cached layer)
+# Network access: cargo auditable needs it
+RUN --network=default \
+  --mount=type=cache,target=/root/.cargo/registry \
+  --mount=type=cache,target=/app/target \
+  cargo auditable build \
+    --locked \
+    --release \
+    --bin mas-cli \
+    --no-default-features \
+    --features docker \
+    ## PG_CHANGED Docker is used to generate the files in same architecture as the deploy machine.
+    --target x86_64-unknown-linux-gnu \
+    # PG_CHANGED - comments out arm64
+    # --target aarch64-unknown-linux-gnu \
+  && mv "target/x86_64-unknown-linux-gnu/release/mas-cli" /usr/local/bin/mas-cli-amd64
+  # PG_CHANGED - comments out arm64
+  # && mv "target/aarch64-unknown-linux-gnu/release/mas-cli" /usr/local/bin/mas-cli-arm64
+
+#######################################
+## Prepare /usr/local/share/mas-cli/ ##
+#######################################
+FROM --platform=${BUILDPLATFORM} scratch AS share
+
+COPY --from=frontend /share /share
+COPY --from=policy /app/policies/policy.wasm /share/policy.wasm
+COPY ./templates/ /share/templates
+COPY ./translations/ /share/translations
+
+##################################
+## Runtime stage, debug variant ##
+##################################
+FROM gcr.io/distroless/cc-debian${DEBIAN_VERSION}:debug-nonroot AS debug
+
+ARG TARGETARCH
+COPY --from=builder /usr/local/bin/mas-cli-${TARGETARCH} /usr/local/bin/mas-cli
+COPY --from=share /share /usr/local/share/mas-cli
+
+WORKDIR /
+ENTRYPOINT ["/usr/local/bin/mas-cli"]
+
+###################
+## Runtime stage ##
+###################
+FROM gcr.io/distroless/cc-debian${DEBIAN_VERSION}:nonroot
+
+ARG TARGETARCH
+COPY --from=builder /usr/local/bin/mas-cli-${TARGETARCH} /usr/local/bin/mas-cli
+COPY --from=share /share /usr/local/share/mas-cli
+
+WORKDIR /
+ENTRYPOINT ["/usr/local/bin/mas-cli"]

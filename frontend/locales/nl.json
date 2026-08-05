@@ -1,0 +1,402 @@
+{
+  "action": {
+    "back": "Terug",
+    "cancel": "Annuleren",
+    "clear": "Wissen",
+    "close": "Sluiten",
+    "collapse": "Samenvouwen",
+    "confirm": "Bevestigen",
+    "continue": "Doorgaan",
+    "edit": "Bewerken",
+    "expand": "Uitbreiden",
+    "save": "Opslaan",
+    "save_and_continue": "Opslaan en verder",
+    "sign_out": "Afmelden",
+    "start_over": "Opnieuw beginnen"
+  },
+  "branding": {
+    "privacy_policy": {
+      "alt": "Link naar het privacybeleid",
+      "link": "Privacybeleid"
+    },
+    "terms_and_conditions": {
+      "alt": "Link naar de gebruiksvoorwaarden",
+      "link": "Algemene voorwaarden"
+    }
+  },
+  "common": {
+    "add": "Toevoegen",
+    "e2ee": "End-to-end-versleuteling",
+    "error": "Fout",
+    "loading": "Laden…",
+    "next": "Volgende",
+    "password": "Wachtwoord",
+    "previous": "Vorige",
+    "saved": "Opgeslagen",
+    "saving": "Opslaan…"
+  },
+  "frontend": {
+    "account": {
+      "account_password": "Account wachtwoord",
+      "contact_info": "Contactgegevens",
+      "delete_account": {
+        "alert_description": "Dit account wordt permanent verwijderd en je hebt geen toegang meer tot je berichten.",
+        "alert_title": "Je staat op het punt al je gegevens te verliezen",
+        "button": "Account verwijderen",
+        "dialog_description": "<text>Bevestig dat je je account wilt verwijderen:</text>\n<profile />\n<list>\n<item>Je kunt deze account niet reactiveren</item>\n<item>Je kunt niet langer aanmelden</item>\n<item>Niemand zal je gebruikersnaam opnieuw kunnen gebruiken (MXID), ook jij niet</item>\n<item>Je verlaat alle groepen en gesprekken</item>\n<item>Je wordt verwijderd van de identiteitsserver, en niemand kan je nog vinden met je e-mailadres of telefoonnummer</item>\n</list>\n<text>Je oude berichten blijven zichtbaar voor de ontvanger. Wil je je berichten verbergen voor gebruikers die in de toekomst deelnemen aan de groep?</text>",
+        "dialog_title": "Dit account verwijderen?",
+        "erase_checkbox_label": "Ja, verberg al mijn berichten van nieuwe deelnemers",
+        "incorrect_password": "Onjuist wachtwoord, probeer opnieuw",
+        "mxid_label": "Bevestig je Beam-ID ({{ mxid }})",
+        "mxid_mismatch": "Deze waarde komt niet overeen met je Beam ID",
+        "password_label": "Voeg je wachtwoord in om verder te gaan"
+      },
+      "edit_profile": {
+        "display_name_help": "Dit is wat anderen zien wanneer je bent ingelogd.",
+        "display_name_label": "Weergavenaam",
+        "title": "Profiel bewerken",
+        "username_label": "Gebruikersnaam"
+      },
+      "password": {
+        "change": "Wachtwoord wijzigen",
+        "change_disabled": "Wachtwoordwijzigingen zijn door de admin gedeactiveerd.",
+        "label": "Wachtwoord"
+      },
+      "sign_out": {
+        "button": "Afmelden bij account",
+        "dialog": "Afmelden bij dit account?"
+      },
+      "title": "Je account"
+    },
+    "add_email_form": {
+      "email_denied_alert": {
+        "text": "Het ingevoerde e-mailadres is niet toegestaan volgens het serverbeleid.",
+        "title": "E-mailadres geweigerd door het beleid"
+      },
+      "email_denied_error": "Het opgegeven e-mailadres is niet toegestaan",
+      "email_exists_alert": {
+        "text": "Het ingevoerde e-mailadres is al toegevoegd aan dit account",
+        "title": "E-mailadres bestaat al"
+      },
+      "email_exists_error": "Het ingevoerde e-mailadres is al toegevoegd aan dit account",
+      "email_field_help": "Voeg een alternatief e-mailadres toe dat je kunt gebruiken om toegang tot dit account te krijgen.",
+      "email_field_label": "E-mailadres toevoegen",
+      "email_in_use_error": "Het opgegeven e-mailadres is al in gebruik",
+      "email_invalid_alert": {
+        "text": "Het ingevoerde e-mailadres is ongeldig",
+        "title": "Ongeldig e-mailadres"
+      },
+      "email_invalid_error": "Het ingevoerde e-mailadres is ongeldig",
+      "incorrect_password_error": "Onjuist wachtwoord, probeer het alstublieft opnieuw",
+      "password_confirmation": "Bevestig je wachtwoord om dit e-mailadres toe te voegen"
+    },
+    "app_sessions_list": {
+      "error": "Kan app-sessies niet laden",
+      "heading": "Apps"
+    },
+    "browser_session_details": {
+      "current_badge": "Huidige",
+      "session_details_title": "Sessie"
+    },
+    "browser_sessions_overview": {
+      "body:one": "{{count}} actieve sessie",
+      "body:other": "{{count}} actieve sessies",
+      "heading": "Browsers",
+      "no_active_sessions": {
+        "default": "Je bent op geen enkele browser aangemeld.",
+        "inactive_90_days": "Al je sessies zijn actief geweest in de afgelopen 90 dagen."
+      },
+      "view_all_button": "Bekijk alles"
+    },
+    "compat_session_detail": {
+      "client_details_title": "Klantinformatie",
+      "name": "Naam",
+      "session_details_title": "Sessie"
+    },
+    "device_type_icon_label": {
+      "desktop": "Desktop",
+      "mobile": "Mobiel",
+      "pc": "Computer",
+      "tablet": "Tablet",
+      "unknown": "Onbekend apparaattype",
+      "web": "Web"
+    },
+    "email_in_use": {
+      "heading": "Het e-mailadres {{email}} is al in gebruik."
+    },
+    "end_session_button": {
+      "confirmation_modal_body_text": "Make sure you always have access to another verified device or your recovery key to avoid losing your encrypted chat history.",
+      "confirmation_modal_title": "Weet u zeker dat u deze sessie wilt beëindigen?",
+      "text": "Uitloggen"
+    },
+    "error": {
+      "hideDetails": "Verberg details",
+      "showDetails": "Details weergeven",
+      "subtitle": "Er is een onverwachte fout opgetreden. Probeer het opnieuw.",
+      "title": "Er is iets misgegaan"
+    },
+    "error_boundary_title": "Er is iets misgegaan",
+    "errors": {
+      "field_required": "Dit is een verplicht veld",
+      "rate_limit_exceeded": "Je hebt te veel keer geprobeerd op een korte tijd. Wacht enkele minuten en probeer opnieuw."
+    },
+    "last_active": {
+      "active_date": "Actief {{relativeDate}}",
+      "active_now": "Nu actief",
+      "inactive_90_days": "Meer dan 90 dagen inactief"
+    },
+    "nav": {
+      "devices": "Apparaten",
+      "plan": "Abonnement",
+      "profile": "Profiel",
+      "sessions": "Sessies",
+      "settings": "Instellingen"
+    },
+    "not_found_alert_title": "Niet gevonden",
+    "not_logged_in_alert": "U bent niet ingelogd.",
+    "oauth2_client_detail": {
+      "details_title": "Client-info",
+      "id": "Client ID",
+      "name": "Naam",
+      "policy": "Beleid",
+      "terms": "Servicevoorwaarden"
+    },
+    "oauth2_session_detail": {
+      "client_details_name": "Naam",
+      "client_title": "Klantinformatie",
+      "session_details_title": "Sessie"
+    },
+    "pagination_controls": {
+      "total": "Totaal: {{totalCount}}"
+    },
+    "password_change": {
+      "current_password_label": "Huidig wachtwoord",
+      "failure": {
+        "description": {
+          "account_locked": "Je account is vergrendeld en kan op dit moment niet worden hersteld. Als dit niet de bedoeling is, neem dan contact op met je serveradministrator.",
+          "expired_recovery_ticket": "De herstel link is verlopen. Begin alsjeblieft het accountherstelproces opnieuw vanaf het begin.",
+          "invalid_new_password": "Het nieuwe wachtwoord dat je hebt gekozen is ongeldig; het voldoet mogelijk niet aan het geconfigureerde beveiligingsbeleid.",
+          "no_current_password": "Je hebt geen actueel wachtwoord.",
+          "no_such_recovery_ticket": "De herstellink is ongeldig. Als je de link uit de herstel-e-mail hebt gekopieerd, controleer dan of de volledige link is gekopieerd.",
+          "password_changes_disabled": "Wachtwoordwijzigingen zijn uitgeschakeld.",
+          "recovery_ticket_already_used": "De herstellink is al gebruikt. Hij kan niet opnieuw gebruikt worden.",
+          "unspecified": "Dit kan een tijdelijk probleem zijn, probeer het later opnieuw. Als het probleem aanhoudt, neem dan contact op met je serveradministrator.",
+          "wrong_password": "Het wachtwoord dat je hebt opgegeven als je huidige wachtwoord is onjuist. Probeer het opnieuw."
+        },
+        "title": "Wachtwoord bijwerken mislukt"
+      },
+      "new_password_again_label": "Wachtwoord opnieuw ingeven",
+      "new_password_label": "Nieuw wachtwoord",
+      "passwords_match": "Wachtwoorden komen overeen!",
+      "passwords_no_match": "Wachtwoorden komen niet overeen",
+      "subtitle": "Kies een nieuw wachtwoord voor je account.",
+      "success": {
+        "description": "Je wachtwoord is succesvol bijgewerkt.",
+        "title": "Wachtwoord bijgewerkt"
+      },
+      "title": "Wachtwoord veranderen"
+    },
+    "password_reset": {
+      "consumed": {
+        "subtitle": "Begin opnieuw en selecteer \"wachtwoord vergeten\" om een nieuw wachtwoord in te stellen.",
+        "title": "De link om je wachtwoord opnieuw in te stellen is al gebruikt"
+      },
+      "expired": {
+        "resend_email": "e-mail opnieuw versturen",
+        "subtitle": "Vraag een nieuwe e-mail aan die naar volgend adres verzonden wordt: {{email}}",
+        "title": "De link om je wachtwoord opnieuw in te stellen is verlopen"
+      },
+      "subtitle": "Kies een nieuw wachtwoord voor je account.",
+      "title": "Herstel je wachtwoord"
+    },
+    "password_strength": {
+      "placeholder": "Wachtwoordsterkte",
+      "score": {
+        "0": "Extreem zwak wachtwoord",
+        "1": "Heel zwak wachtwoord",
+        "2": "Zwak wachtwoord",
+        "3": "Sterk wachtwoord",
+        "4": "Heel sterk wachtwoord"
+      },
+      "suggestion": {
+        "all_uppercase": "Gebruik enkele hoofdletters, maar niet allemaal.",
+        "another_word": "Voeg woorden toe die niet vaak gebruikt worden.",
+        "associated_years": "Vermijd jaren die met jou verbonden zijn.",
+        "capitalization": "Gebruik meer hoofdletters dan enkel de eerste letter.",
+        "dates": "Vermijd data en jaren die met jou geassocieerd zijn.",
+        "l33t": "Vermijd voorspelbare lettervervangingen zoals '@' for 'a'.",
+        "longer_keyboard_pattern": "Gebruik langere toetsenbordpatronen en verander meerdere keren van typrichting.",
+        "no_need": "Je kunt sterke wachtwoorden maken zonder symbolen, cijfers of hoofdletters te gebruiken.",
+        "pwned": "Als je dit wachtwoord elders gebruikt, moet je het veranderen.",
+        "recent_years": "Vermijd recente jaren",
+        "repeated": "Vermijd herhaalde woorden en tekens.",
+        "reverse_words": "Vermijd omgekeerde spelling van veelgebruikte woorden.",
+        "sequences": "Vermijd veelvoorkomende tekenreeksen.",
+        "use_words": "Gebruik verschillende woorden, maar vermijd veelvoorkomende zinnen."
+      },
+      "too_weak": "Dit wachtwoord is te zwak",
+      "warning": {
+        "common": "Dit is een veelvoorkomend wachtwoord.",
+        "common_names": "Veelvoorkomende voor- en achternamen zijn gemakkelijk te raden.",
+        "dates": "Data zijn makkelijk te raden.",
+        "extended_repeat": "Herhaalde tekenpatronen zoals \"abcabcabc\" zijn makkelijk te raden.",
+        "key_pattern": "Korte toetsenbordpatronen zijn makkelijk te raden.",
+        "names_by_themselves": "Enkele voor- en achternamen zijn gemakkelijk te raden.",
+        "pwned": "Je wachtwoord werd blootgesteld door een datalek op het Internet.",
+        "recent_years": "Recente jaren zijn makkelijk te raden.",
+        "sequences": "Veelvoorkomende tekenreeksen zoals 'abc' zijn makkelijk te raden.",
+        "similar_to_common": "Dit is gelijkaardig aan een veelvoorkomend wachtwoord.",
+        "simple_repeat": "Herhaalde letters zoals \"aaa\" zijn makkelijk te raden.",
+        "straight_row": "Rechtdoorlopende rijen toetsen op je toetsenbord zijn gemakkelijk te raden.",
+        "top_hundred": "Dit is een veelvoorkomend wachtwoord.",
+        "top_ten": "Dit is een veelvoorkomend wachtwoord.",
+        "user_inputs": "Er mogen geen persoonlijke of pagina-gerelateerde gegevens zijn.",
+        "word_by_itself": "Enkele woorden zijn makkelijk te raden."
+      }
+    },
+    "reset_cross_signing": {
+      "button": "Identiteit resetten",
+      "cancelled": {
+        "description_1": "Je kunt dit venster sluiten en teruggaan naar de app om door te gaan.",
+        "description_2": "Als je overal bent afgemeld en je herstelsleutel niet meer weet, moet je je identiteit nog steeds opnieuw instellen.",
+        "heading": "Identiteitsherstel geannuleerd"
+      },
+      "description": "Als je niet op andere apparaten bent ingelogd en je herstelsleutel verloren bent, moet je je identiteit resetten om door te gaan.",
+      "effect_list": {
+        "negative_1": "You will lose your existing message history",
+        "negative_2": "You will need to verify all your existing devices and contacts again",
+        "neutral_1": "Je verliest alle berichtgeschiedenis die alleen op de server is opgeslagen",
+        "neutral_2": "Je moet al je bestaande apparaten en contacten opnieuw verifiëren",
+        "positive_1": "Je accountgegevens, contacten, voorkeuren en groepslijsten worden bewaard"
+      },
+      "failure": {
+        "description": "Dit is mogelijk een tijdelijk probleem, probeer het later opnieuw. Als het probleem blijft bestaan, neem dan contact op met je serverbeheerder.",
+        "heading": "Mislukt om het identiteitsherstel toe te laten",
+        "title": "Kan crypto identiteit niet toestaan"
+      },
+      "finish_reset": "Herstel voltooien",
+      "heading": "Stel je identiteit opnieuw in als je niet op een andere manier kunt bevestigen",
+      "start_reset": "Start herstel",
+      "success": {
+        "description": "Het identiteitsherstel is goedgekeurd voor de komende {{minutes}} minuten. Je kunt dit venster sluiten en teruggaan naar de app om door te gaan.",
+        "heading": "Identiteitsherstel succesvol. Ga terug naar de app om het proces te voltooien.",
+        "title": "Het opnieuw instellen van de crypto identiteit is tijdelijk toegestaan"
+      },
+      "warning": "Stel je identiteit alleen opnieuw in als je geen toegang hebt tot een ander ingelogd apparaat en je je herstelsleutel bent verloren."
+    },
+    "selectable_session": {
+      "label": "Sessie selecteren"
+    },
+    "session": {
+      "client_id_label": "Cliënt-ID",
+      "current": "Huidige",
+      "current_badge": "Huidige",
+      "device_id_label": "Apparaat-ID",
+      "finished_date": "Voltooid op <datetime/>",
+      "finished_label": "Voltooid",
+      "generic_browser_session": "Browsersessie",
+      "id_label": "ID",
+      "ip_label": "IP-adres",
+      "last_active_label": "Laatst actief",
+      "last_auth_label": "Laatste authenticatie",
+      "name_for_platform": "{{name}} voor {{platform}}",
+      "scopes_label": "Scopes",
+      "set_device_name": {
+        "help": "Geef een naam in die je helpt dit apparaat te identificeren.",
+        "label": "Apparaatnaam",
+        "title": "Apparaatnaam aanpassen"
+      },
+      "signed_in_date": "Ingelogd op <datetime/>",
+      "signed_in_label": "Aangemeld",
+      "title": "Apparaatdetails",
+      "unknown_browser": "Onbekende browser",
+      "unknown_device": "Onbekend apparaat",
+      "uri_label": "URI",
+      "user_id_label": "Gebruikers-ID",
+      "username_label": "Gebruikersnaam"
+    },
+    "session_detail": {
+      "alert": {
+        "button": "Terug",
+        "text": "Deze sessie bestaat niet of is niet langer actief.",
+        "title": "Sessie niet gevonden: {{deviceId}}"
+      }
+    },
+    "unknown_route": "Onbekende route {{route}}",
+    "unverified_email_alert": {
+      "button": "Controleren en verifiëren",
+      "text:one": "You have {{count}} unverified email address.",
+      "text:other": "You have {{count}} unverified email addresses.",
+      "title": "Niet geverifieerd e-mailadres"
+    },
+    "user_email": {
+      "cant_delete_primary": "Kies een ander primair e-mailadres om de huidige te verwijderen.",
+      "delete_button_confirmation_modal": {
+        "action": "E-mailadres verwijderen",
+        "body": "Dit e-mailadres verwijderen?",
+        "incorrect_password": "Ongeldig wachtwoord, probeer opnieuw",
+        "password_confirmation": "Bevestig je wachtwoord om dit e-mailadres te verwijderen"
+      },
+      "delete_button_title": "E-mailadres verwijderen",
+      "email": "E-mailadres",
+      "make_primary_button": "Instellen als primair",
+      "not_verified": "Niet geverifieerd",
+      "primary_email": "Primair e-mailadres",
+      "retry_button": "Code opnieuw verzenden",
+      "unverified": "Niet geverifieerd"
+    },
+    "user_email_list": {
+      "heading": "E-mailadressen",
+      "no_primary_email_alert": "Geen primair e-mailadres"
+    },
+    "user_greeting": {
+      "error": "Het laden van de gebruiker is mislukt"
+    },
+    "user_name": {
+      "display_name_field_label": "Weergavenaam"
+    },
+    "user_sessions_overview": {
+      "active_sessions:one": "{{count}} actieve sessie",
+      "active_sessions:other": "{{count}} actieve sessies",
+      "heading": "Je bent aangemeld op",
+      "no_active_sessions": {
+        "default": "Je bent op geen enkele app aangemeld",
+        "inactive_90_days": "Al je sessies waren de laatste 90 dagen actief."
+      }
+    },
+    "verify_email": {
+      "code_expired_alert": {
+        "description": "De code is niet meer geldig. Vraag een nieuwe code aan.",
+        "title": "Code niet meer geldig"
+      },
+      "code_field_error": "Code niet herkend",
+      "code_field_label": "6-cijferige code",
+      "code_field_wrong_shape": "Code moet 6 cijfers bevatten",
+      "email_sent_alert": {
+        "description": "Geef de nieuwe code in.",
+        "title": "Nieuwe code verzonden"
+      },
+      "enter_code_prompt": "Geef de 6-cijferige code die je ontving op <email>{{email}}</email> in",
+      "heading": "Verifieer je e-mailadres",
+      "invalid_code_alert": {
+        "description": "Controleer de code die je per mail ontving en vul ze hieronder in om verder te gaan.",
+        "title": "Je hebt een foute code ingegeven"
+      },
+      "resend_code": "Code opnieuw verzenden",
+      "resend_email": "Resend email",
+      "sent": "Verzonden!",
+      "unknown_email": "Unknown email"
+    }
+  },
+  "mas": {
+    "scope": {
+      "edit_profile": "Bewerk je profiel en contactgegevens",
+      "manage_sessions": "Beheer je apparaten en sessies",
+      "mas_admin": "Beheer elke gebruiker op de Beam-authentication-service",
+      "send_messages": "Verzend een nieuw bericht",
+      "synapse_admin": "Beheer de server (urn:synapse:admin:*)",
+      "view_messages": "Bekijk je bestaande berichten en gegevens",
+      "view_profile": "Bekijk je profiel- en contactgegevens"
+    }
+  }
+}

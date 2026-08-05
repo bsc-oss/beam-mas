@@ -1,0 +1,5 @@
+{
+  "rust-analyzer.runnables.extraEnv": {
+    "DATABASE_URL": "postgresql://postgres:postgres@localhost:5432/mas"
+  }
+}

@@ -1,0 +1,182 @@
+# syntax = docker/dockerfile:1.7.1
+# Copyright 2025 New Vector Ltd.
+#
+# SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+# Please see LICENSE files in the repository root for full details.
+
+# Dockerfile for building the PG release zip file.
+# This creates a zip with: mas-cli, frontend/dist/, policies/, templates/, translations/
+#
+# Usage:
+#   docker buildx build --platform linux/amd64 -f Dockerfile.pg-release --output type=local,dest=. .
+#
+# The zip file will be placed in ./pg-release/pg-mas-YYYYMMDD-VERSION.zip
+
+# Debian is used for frontend/policy build stages only (cross-compile host)
+ARG DEBIAN_VERSION_NAME=bookworm
+# Rocky Linux version must match the target RHEL version (glibc compatibility)
+# Rocky Linux 9.7 ships glibc 2.34, matching RHEL 9.7
+ARG ROCKY_VERSION=9.7
+# Keep in sync with .github/workflows/ci.yaml
+ARG RUSTC_VERSION=1.93.0
+ARG NODEJS_VERSION=24.13.0
+# Keep in sync with .github/actions/build-policies/action.yml and policies/Makefile
+ARG OPA_VERSION=1.13.1
+ARG CARGO_AUDITABLE_VERSION=0.7.2
+
+##########################################
+## Build stage that builds the frontend ##
+##########################################
+FROM --platform=${BUILDPLATFORM} docker.io/library/node:${NODEJS_VERSION}-${DEBIAN_VERSION_NAME} AS frontend
+
+WORKDIR /app/frontend
+
+# PG_CHANGED - installs our custom CAs.
+COPY custom-cas/*.crt /usr/local/share/ca-certificates/
+RUN update-ca-certificates
+
+# PG_CHANGED - configures node to use the custom CAs.
+ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+
+COPY ./frontend/.npmrc ./frontend/package.json ./frontend/package-lock.json /app/frontend/
+# Network access: to fetch dependencies
+RUN --network=default \
+  npm ci
+
+COPY ./frontend/ /app/frontend/
+COPY ./templates/ /app/templates/
+RUN --network=none \
+  npm run build
+
+# Keep manifest.json in dist for the release zip
+RUN --network=none \
+  mkdir -p /share/assets && \
+  cp ./dist/manifest.json /share/manifest.json && \
+  rm -f ./dist/index.html* && \
+  cp -r ./dist/* /share/assets/
+
+##############################################
+## Build stage that builds the OPA policies ##
+##############################################
+FROM --platform=${BUILDPLATFORM} docker.io/library/buildpack-deps:${DEBIAN_VERSION_NAME} AS policy
+
+ARG BUILDOS
+ARG BUILDARCH
+ARG OPA_VERSION
+
+# Download Open Policy Agent
+ADD --chmod=755 https://github.com/open-policy-agent/opa/releases/download/v${OPA_VERSION}/opa_${BUILDOS}_${BUILDARCH}_static /usr/local/bin/opa
+
+WORKDIR /app/policies
+COPY ./policies /app/policies
+RUN --network=none  \
+  make -B && \
+  chmod a+r ./policy.wasm
+
+########################################
+## Build stage that builds the binary ##
+########################################
+# Use Rocky Linux as the build base to ensure glibc compatibility with the target RHEL version
+FROM --platform=linux/amd64 docker.io/rockylinux/rockylinux:${ROCKY_VERSION} AS builder
+
+ARG CARGO_AUDITABLE_VERSION
+ARG RUSTC_VERSION
+
+# PG_CHANGED - installs our custom CAs.
+COPY custom-cas/*.crt /etc/pki/ca-trust/source/anchors/
+RUN update-ca-trust
+
+# Install build dependencies
+# Network access: to install dnf packages
+RUN --network=default \
+  dnf install -y gcc gcc-c++ make && \
+  dnf clean all
+
+# Install Rust via rustup (pinned version)
+# Network access: to fetch rustup and toolchain
+RUN --network=default \
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | \
+  sh -s -- -y --default-toolchain "${RUSTC_VERSION}" --profile minimal && \
+  . /root/.cargo/env && \
+  rustup target add x86_64-unknown-linux-gnu
+
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+# Install pinned version of cargo-auditable
+# Network access: to fetch dependencies
+RUN --network=default \
+  cargo install --locked \
+  cargo-auditable@=${CARGO_AUDITABLE_VERSION}
+
+# Set the working directory
+WORKDIR /app
+
+# Copy only dependency manifests first to cache dependencies
+COPY ./Cargo.toml ./Cargo.lock /app/
+COPY ./crates /app/crates
+
+ENV SQLX_OFFLINE=true
+
+ARG VERGEN_GIT_DESCRIBE
+ENV VERGEN_GIT_DESCRIBE=${VERGEN_GIT_DESCRIBE}
+
+# Build for release (no extra features - uses default paths)
+# Network access: cargo auditable needs it
+RUN --network=default \
+  --mount=type=cache,target=/root/.cargo/registry \
+  --mount=type=cache,target=/app/target \
+  cargo auditable build \
+    --locked \
+    --release \
+    --bin mas-cli \
+    --no-default-features \
+    --target x86_64-unknown-linux-gnu \
+  && mv "target/x86_64-unknown-linux-gnu/release/mas-cli" /usr/local/bin/mas-cli-amd64
+
+# Verify the binary's minimum glibc requirement does not exceed RHEL 9.7's glibc 2.34
+RUN objdump -p /usr/local/bin/mas-cli-amd64 | grep GLIBC
+
+##########################################
+## Build stage that creates the zip file #
+##########################################
+FROM --platform=${BUILDPLATFORM} docker.io/rockylinux/rockylinux:${ROCKY_VERSION}-minimal AS zipbuilder
+
+RUN --network=default \
+  microdnf install -y zip && \
+  microdnf clean all
+
+WORKDIR /staging
+
+# Copy binary
+COPY --from=builder /usr/local/bin/mas-cli-amd64 /staging/mas-cli
+
+# Copy frontend assets and manifest to frontend/dist/
+COPY --from=frontend /share/assets /staging/frontend/dist/
+COPY --from=frontend /share/manifest.json /staging/frontend/dist/manifest.json
+
+# Copy policy
+COPY --from=policy /app/policies/policy.wasm /staging/policies/policy.wasm
+
+# Copy templates and translations
+COPY ./templates/ /staging/templates/
+COPY ./translations/ /staging/translations/
+
+# Copy Cargo.toml to extract version
+COPY ./Cargo.toml /tmp/Cargo.toml
+
+# Create the zip file with versioned name: pg-mas-YYYYMMDD-VERSION.zip
+RUN --network=none \
+  set -e && \
+  chmod +x /staging/mas-cli && \
+  VERSION=$(sed -n 's/^package\.version *= *"\([^"]*\)".*/\1/p' /tmp/Cargo.toml) && \
+  DATE=$(date +%Y%m%d) && \
+  ZIPNAME="pg-mas-${DATE}-${VERSION}.zip" && \
+  zip -qr "/${ZIPNAME}" . && \
+  echo "${ZIPNAME}" > /zipname.txt
+
+###############################################
+## Final stage that outputs the release zip  ##
+###############################################
+FROM scratch
+
+COPY --from=zipbuilder /pg-mas*.zip /pg-release/
