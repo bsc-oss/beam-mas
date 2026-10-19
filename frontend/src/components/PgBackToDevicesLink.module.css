@@ -1,0 +1,14 @@
+/* Copyright 2026 Belgian Secure Communications (BSC)
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ * Please see LICENSE files in the repository root for full details.
+ */
+
+/* Buttons pad their inline sides, and pad the start further when they have an icon
+ * (`.button[data-size="md"].has-icon:not(.icon-only)`). Both rules have to be beaten for
+ * the arrow to line up with the left edge of the page, hence the attributes piled on
+ * here: they only exist to raise the specificity above those. */
+a.back-link[data-kind][data-size][href] {
+  align-self: flex-start;
+  padding-inline: 0;
+}

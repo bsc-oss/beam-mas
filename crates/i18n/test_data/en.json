@@ -1,0 +1,12 @@
+{
+  "hello": "Hello!",
+  "goodbye": "Goodbye!",
+  "active_sessions": {
+    "one": "%(count)d active session.",
+    "other": "%(count)d active sessions."
+  },
+  "english_only_plural": {
+    "one": "%(count)d item.",
+    "other": "%(count)d items."
+  }
+}

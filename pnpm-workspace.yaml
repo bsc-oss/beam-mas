@@ -1,0 +1,73 @@
+# Copyright 2026 Element Creations Ltd.
+#
+# SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
+# Please see LICENSE files in the repository root for full details.
+# $schema: https://www.schemastore.org/pnpm-workspace.json
+
+packages:
+  # PG_CHANGED: upstream also lists `.github/scripts` (release tooling for its
+  # GitHub Actions workflows). We removed the `.github` directory entirely.
+  - "frontend"
+
+# Enforce the package.json `engines` field.
+engineStrict: true
+
+# Refuse to install dependencies whose trust level has dropped compared to an
+# earlier release (e.g. a previously-provenanced package now publishing without
+# provenance). Add specific selectors to `trustPolicyExclude` to override.
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  # @babel/core@7.29.0 still pulls in semver@6.3.1, whose earlier versions
+  # had provenance attestation but this one does not.
+  - "semver@6.3.1"
+  # @actions/github-script bundles @actions/http-client which pulls in
+  # undici@5.29.0 — older 5.x releases were published with provenance.
+  - "undici@5.29.0"
+  # They switched to npm staged publishing, which for some reason npm flags
+  # from being a release with a trusted publisher (GH actions) and provenance
+  # to one with only provenance.
+  - "tinyexec@1.2.2"
+  # PG_CHANGED: our GitLab package registry does not expose the `time` field in
+  # its metadata, so the trust policy cannot compare against earlier releases.
+  - "@pg/compound-web@1.0.3"
+  - "@pg/compound-design-tokens@1.0.3"
+
+# Force a single copy of @radix-ui/react-dialog across the tree: vaul resolves
+# its own (older) copy otherwise, and mixing two copies breaks React context
+# between the app's Dialog.Trigger and vaul's Drawer.Root ("DialogTrigger must
+# be used within Dialog" on mobile). Keep in sync with frontend/package.json.
+overrides:
+  "@radix-ui/react-dialog": ^1.1.18
+
+# Fail the install if any dependency has a build script that isn't explicitly
+# allowed. Add entries to `allowBuilds` (package name pattern -> bool) to
+# permit specific packages to run their install/build scripts.
+strictDepBuilds: true
+allowBuilds:
+  # Native binary toolchains
+  "@swc/core": true
+  esbuild: true
+  # MSW writes a service worker file into .storybook/public during install
+  msw: true
+  # Telemetry collector — opt out
+  "@scarf/scarf": false
+  # The @actions/github-script repo only ships sources; it has a "prepare"
+  # script that runs tsc to produce dist/ when fetched directly from git.
+  "@actions/github-script": true
+
+# Fail the install if peer dependencies are missing or unsatisfied. Add
+# entries under `peerDependencyRules.allowedVersions` to whitelist specific
+# version mismatches.
+strictPeerDependencies: true
+peerDependencyRules:
+  # PG_CHANGED: `@pg/compound-web` declares its design-tokens peer as the
+  # alias `@vector-im/compound-design-tokens: npm:@pg/compound-design-tokens`
+  # (its compiled code still imports the `@vector-im` path). We install that
+  # alias in frontend/package.json, but pnpm cannot match a version range
+  # against an aliased peer spec, so accept the pinned version explicitly.
+  allowedVersions:
+    "@vector-im/compound-design-tokens": "1.0.3"
+
+minimumReleaseAgeExclude:
+  # We need this fix: https://github.com/zxcvbn-ts/zxcvbn/pull/330
+  - "@zxcvbn-ts/language-common@4.1.3"

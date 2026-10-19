@@ -1,0 +1,49 @@
+/* Copyright 2026 Belgian Secure Communications (BSC)
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ * Please see LICENSE files in the repository root for full details.
+ */
+
+/* Same shape as the session cards on these pages, on a subtle background so it reads
+ * as supporting information rather than as another session in the list. */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cpd-space-4x);
+
+  padding: var(--cpd-space-6x);
+  border-radius: var(--cpd-space-4x);
+  background-color: var(--cpd-color-bg-subtle-secondary);
+  outline: 1px solid var(--cpd-color-border-interactive-secondary);
+  outline-offset: -1px;
+}
+
+/* Collapsible.Section renders its title as an h4, styled as a page heading. In the card
+ * these are not page sections, so they are toned down to body size and underlined to
+ * read as the things you can open. */
+.card h4 {
+  font: var(--cpd-font-body-md-semibold);
+  letter-spacing: var(--cpd-font-letter-spacing-body-md);
+  text-decoration: underline;
+}
+
+/* Small labelled header, so the card announces itself without competing with the
+ * section titles below it. */
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--cpd-space-2x);
+  color: var(--cpd-color-text-secondary);
+}
+
+.header svg {
+  flex-shrink: 0;
+  block-size: var(--cpd-space-5x);
+  inline-size: var(--cpd-space-5x);
+}
+
+/* The emphasised phrases: `Text` sets a regular weight on itself, so pin the weight rather
+ * than relying on the browser resolving `bolder` against it. */
+.card strong {
+  font-weight: var(--cpd-font-weight-semibold);
+}
